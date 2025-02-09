@@ -1,12 +1,7 @@
-import 'package:agri_app/bookresources_page.dart';
-import 'package:agri_app/connect_page.dart';
-import 'package:agri_app/home_page.dart';
-import 'package:agri_app/home_page.dart';
 
 import 'package:agri_app/profile_page.dart';
 import 'package:agri_app/terms_page.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart' hide CarouselController;
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});

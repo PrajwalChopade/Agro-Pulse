@@ -1,9 +1,13 @@
 import 'package:agri_app/bookresources_page.dart';
+// import 'package:agri_app/crop_prediction_screen.dart';
+import 'screens/crop_pred.dart';
+import 'screens/crop_price_screen.dart';
+// import 'package:agri_app/crop_price_prediction_screen.dart';
+// import 'package:agri_app/crop_disease_prediction_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart' hide CarouselController;
+import 'package:carousel_slider/carousel_slider.dart';
 import 'profile_page.dart';
 import 'about_page.dart';
-import 'bookresources_page.dart';
 import 'connect_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,70 +48,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FarmConnect'),
+        title: const Text(
+          'FarmConnect',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
-            onPressed: () {
-              // Handle notifications
-            },
+            onPressed: () {},
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.green),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.person, size: 40),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'User Name',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Profile'),
-              onTap: () {
-                Navigator.pop(context); // Close drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('About Us'),
-              onTap: () {
-                Navigator.pop(context); // Close drawer
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AboutUsPage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.description),
-              title: const Text('Terms & Conditions'),
-              onTap: () {
-                // Handle Terms & Conditions
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: _buildDrawer(context),
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {
@@ -118,26 +70,47 @@ class _HomePageState extends State<HomePage> {
         children: _pages,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // Handle chat
-        },
+        onPressed: () {},
         child: const Icon(Icons.chat),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: 'Booked'),
+          BottomNavigationBarItem(icon: Icon(Icons.connect_without_contact), label: 'Connect'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        children: [
+          UserAccountsDrawerHeader(
+            accountName: const Text("User Name"),
+            accountEmail: const Text("user@example.com"),
+            currentAccountPicture: const CircleAvatar(
+              backgroundColor: Colors.white,
+              child: Icon(Icons.person, size: 40, color: Colors.green),
+            ),
+            decoration: const BoxDecoration(color: Colors.green),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Booked',
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: const Text('Profile'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfilePage()));
+            },
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.connect_without_contact),
-            label: 'Connect',
+          ListTile(
+            leading: const Icon(Icons.info),
+            title: const Text('About Us'),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutUsPage()));
+            },
           ),
         ],
       ),
@@ -145,7 +118,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-// Separate widget for home content
 class HomeContent extends StatelessWidget {
   const HomeContent({super.key});
 
@@ -154,93 +126,92 @@ class HomeContent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Container(
-            height: 150,
-            decoration: const BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(50),
-                bottomRight: Radius.circular(50),
-              ),
-            ),
-            child: const Center(
-              child: Text(
-                'Welcome to FarmConnect',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          CarouselSlider(
-            options: CarouselOptions(
-              height: 200.0,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              aspectRatio: 16/9,
-              autoPlayCurve: Curves.fastOutSlowIn,
-              enableInfiniteScroll: true,
-              autoPlayAnimationDuration: const Duration(milliseconds: 800),
-              viewportFraction: 0.8,
-            ),
-            items: [1,2,3].map((i) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      color: Colors.green[100 * i],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Event $i',
-                        style: const TextStyle(fontSize: 20.0),
-                      ),
-                    ),
-                  );
-                },
-              );
-            }).toList(),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildCircularButton(Icons.water_drop, 'Crop Yield Prediction'),
-                const SizedBox(width: 15),
-                _buildCircularButton(Icons.currency_exchange, 'Current Market Trends'),
-                const SizedBox(width: 15),
-                _buildCircularButton(Icons.health_and_safety, 'Plant Health Analysis'),
-                const SizedBox(width: 15),
-              ],
-            ),
-          ),
+          _buildWelcomeHeader(),
+          _buildCarousel(),
+          _buildFeatureCards(context),
         ],
       ),
     );
   }
 
-  Widget _buildCircularButton(IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 80,
-          height: 80,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.green[100],
-          ),
-          child: Icon(icon, size: 40, color: Colors.green),
+  Widget _buildWelcomeHeader() {
+    return Container(
+      height: 150,
+      decoration: const BoxDecoration(
+        color: Colors.green,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(50),
+          bottomRight: Radius.circular(50),
         ),
-        const SizedBox(height: 8),
-        Text(label),
-      ],
+      ),
+      child: const Center(
+        child: Text(
+          'Welcome to FarmConnect',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCarousel() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 200.0,
+        autoPlay: true,
+        enlargeCenterPage: true,
+        viewportFraction: 0.8,
+      ),
+      items: [1, 2, 3].map((i) {
+        return Container(
+          width: double.infinity,
+          margin: const EdgeInsets.symmetric(horizontal: 5.0),
+          decoration: BoxDecoration(
+            color: Colors.green[100 * i],
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(
+              'Event $i',
+              style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _buildFeatureCards(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          _buildFeatureCard(context, Icons.water_drop, 'Crop Yield Prediction', const CropPredictionScreen()),
+          _buildFeatureCard(context, Icons.currency_exchange, 'Market Trends', const CropPricePredictionScreen()),
+          // _buildFeatureCard(context, Icons.health_and_safety, 'Disease Detection', const CropDiseasePredictionScreen()),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFeatureCard(BuildContext context, IconData icon, String label, Widget screen) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
+      },
+      child: Card(
+        elevation: 5,
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: ListTile(
+          leading: Icon(icon, size: 40, color: Colors.green),
+          title: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
+          trailing: const Icon(Icons.arrow_forward_ios, color: Colors.green),
+        ),
+      ),
     );
   }
 }

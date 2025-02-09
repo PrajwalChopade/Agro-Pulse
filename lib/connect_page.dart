@@ -1,10 +1,9 @@
 import 'package:agri_app/bookresources_page.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart' hide CarouselController;
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -142,10 +141,10 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
+        children: [
           Text('Welcome to FarmConnect', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           SizedBox(height: 20),
           Icon(Icons.agriculture, size: 100, color: Colors.green),

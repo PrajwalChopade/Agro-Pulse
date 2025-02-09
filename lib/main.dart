@@ -1,6 +1,8 @@
+// main.dart
 import 'package:flutter/material.dart';
-import 'welcome_page.dart';
-
+// import 'screens/crop_price_screen.dart';
+// import 'package:agri_app/videos_page.dart';
+import 'package:agri_app/login_page.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -11,12 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Agri App',
       theme: ThemeData(
         primarySwatch: Colors.green,
         useMaterial3: true,
       ),
-      home: const WelcomePage(),
+      home: LoginPage(),
     );
   }
 }
