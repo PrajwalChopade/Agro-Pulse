@@ -1,212 +1,309 @@
-import 'package:agri_app/about_page.dart';
-import 'package:agri_app/connect_page.dart';
 import 'package:flutter/material.dart';
-import 'package:agri_app/profile_page.dart';
-import 'package:agri_app/terms_page.dart';
+import 'resources_page.dart';
 
-
-
-void main() {
-  runApp(const agri_app());
-}
-
-class agri_app extends StatelessWidget {
-  const agri_app({super.key});
+class BookResourcesPage extends StatefulWidget {
+  const BookResourcesPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Book Resources',
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: const HomePage(),
-    );
-  }
+  State<BookResourcesPage> createState() => _BookResourcesPageState();
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class _BookResourcesPageState extends State<BookResourcesPage> {
+  String selectedCategory = 'All';
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    const HomePage(),
-    const BookResourcesPage(),
-    const ConnectPage(),
+  final List<Map<String, dynamic>> resources = [
+    {
+      'name': 'Tractor - John Deere',
+      'type': 'Vehicles',
+      'image': 'assets/images/tracter.jpeg',
+      'price': '\₹50/hour',
+      'description': 'Modern farming tractor with advanced features',
+      'available': true,
+    },
+    {
+      'name': 'Harvester Machine',
+      'type': 'Equipment',
+      'image': 'assets/images/harvestor.jpeg',
+      'price': '\₹75/hour',
+      'description': 'High-capacity crop harvesting machine',
+      'available': true,
+    },
+    {
+      'name': 'Expert Farmer Team',
+      'type': 'Manpower',
+      'image': 'assets/images/expert_farmert.jpg',
+      'price': '\₹200/day',
+      'description': 'Skilled agricultural workers for various farming tasks',
+      'available': false,
+    },
+    {
+      'name': 'Irrigation System',
+      'type': 'Tools',
+      'image': 'assets/images/irrigation.jpeg',
+      'price': '\₹30/day',
+      'description': 'Advanced water distribution system for crops',
+      'available': true,
+    },
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+  List<Map<String, dynamic>> get filteredResources {
+    if (selectedCategory == 'All') {
+      return resources;
+    }
+    return resources.where((resource) => resource['type'] == selectedCategory).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FarmConnect'),
+        elevation: 0,
+        title: const Text(
+          "Farm Resources",
+          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications),
+            icon: const Icon(Icons.search, color: Colors.white),
             onPressed: () {},
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.green),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.person, size: 40),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'User Name',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Profile'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ProfilePage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('About Us'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AboutUsPage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.description),
-              title: const Text('Terms & Conditions'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const TermsPage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.shopping_cart),
-              title: const Text('Book Resources'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 300),
-        transitionBuilder: (child, animation) {
-          return SlideTransition(
-            position: Tween<Offset>(
-              begin: const Offset(1.0, 0.0),
-              end: Offset.zero,
-            ).animate(animation),
-            child: child,
-          );
-        },
-        child: _pages[_selectedIndex],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.chat),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Booked',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.connect_without_contact),
-            label: 'Connect',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
-    );
-  }
-}
-
-class BookResourcesPage extends StatelessWidget {
-  const BookResourcesPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Book Resources")),
-      body: GridView.builder(
-        padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 0.8,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-        ),
-        itemCount: 6,
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      body: Column(
+        children: [
+          // Category Filter Section
+          Container(
+            color: Colors.green,
+            padding: const EdgeInsets.only(bottom: 16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Image.network(
-                    'https://via.placeholder.com/150',
-                    fit: BoxFit.cover,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: Text(
+                    'Categories',
+                    style: TextStyle(
+                      color: Colors.green[50],
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                SizedBox(
+                  height: 50,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     children: [
-                      Text("Resource ${index + 1}", style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const Text("Farming Equipment or Manpower"),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text("Book Now"),
-                      ),
+                      _buildCategoryChip('All'),
+                      _buildCategoryChip('Equipment'),
+                      _buildCategoryChip('Manpower'),
+                      _buildCategoryChip('Tools'),
+                      _buildCategoryChip('Vehicles'),
                     ],
                   ),
                 ),
               ],
             ),
-          );
+          ),
+          // Resources List
+          Expanded(
+            child: Container(
+              color: Colors.grey[100],
+              child: ListView.builder(
+                padding: const EdgeInsets.all(16),
+                itemCount: filteredResources.length,
+                itemBuilder: (context, index) {
+                  final resource = filteredResources[index];
+                  return _buildResourceCard(context, resource);
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryChip(String label) {
+    final bool isSelected = selectedCategory == label;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: FilterChip(
+        label: Text(
+          label,
+          style: TextStyle(
+            color: isSelected ? Colors.green : Colors.white,
+            fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+        selected: isSelected,
+        onSelected: (bool value) {
+          setState(() {
+            selectedCategory = label;
+          });
         },
+        backgroundColor: Colors.green[700],
+        selectedColor: Colors.white,
+        checkmarkColor: Colors.green,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      ),
+    );
+  }
+
+  Widget _buildResourceCard(BuildContext context, Map<String, dynamic> resource) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: resource['available']
+            ? () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ResourcePage(resource: resource),
+                  ),
+                );
+              }
+            : null,
+        child: Column(
+          children: [
+            // Image Section
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
+              child: AspectRatio(
+                aspectRatio: 16 / 9,
+                child: Image.asset(
+                  resource['image'],
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      color: Colors.grey[300],
+                      child: const Icon(Icons.image, size: 50, color: Colors.grey),
+                    );
+                  },
+                ),
+              ),
+            ),
+            // Content Section
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              resource['name'],
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                resource['type'],
+                                style: TextStyle(
+                                  color: Colors.grey[800],
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          color: resource['available']
+                              ? Colors.green[100]
+                              : Colors.red[100],
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          resource['available'] ? 'Available' : 'Booked',
+                          style: TextStyle(
+                            color: resource['available']
+                                ? Colors.green[800]
+                                : Colors.red[800],
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    resource['description'],
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 14,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        resource['price'],
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                      if (resource['available'])
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ResourcePage(resource: resource),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.calendar_today_outlined),
+                          label: const Text('Book Now'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

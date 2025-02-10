@@ -1,189 +1,336 @@
-import 'package:agri_app/bookresources_page.dart';
 import 'package:flutter/material.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
+class Company {
+  final String name;
+  final String email;
+  final String phone;
+  final String address;
+  final String description;
+  final String logo;
+  final List<String> products;
+  final String website;
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'FarmConnect',
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: const HomePage(),
-    );
-  }
+  Company({
+    required this.name,
+    required this.email,
+    required this.phone,
+    required this.address,
+    required this.description,
+    required this.logo,
+    required this.products,
+    required this.website,
+  });
 }
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ConnectPage extends StatelessWidget {
+  ConnectPage({Key? key}) : super(key: key);
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final PageController _pageController = PageController();
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    _pageController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
-  }
+  final List<Company> companies = [
+    Company(
+      name: "AgroFresh Ltd.",
+      email: "contact@agrofresh.com",
+      phone: "+1 (555) 123-4567",
+      address: "123 Farming Valley, Agricultural District, CA 94105",
+      description: "AgroFresh Ltd. is a leading provider of organic farming solutions and fresh produce distribution. With over 20 years of experience, we specialize in connecting farmers with premium markets worldwide.",
+      logo: "assets/images/agrofresh_logo.png",
+      products: ["Organic Vegetables", "Fresh Fruits", "Dairy Products", "Grains"],
+      website: "www.agrofresh.com",
+    ),
+    Company(
+      name: "GreenHarvest Industries",
+      email: "info@greenharvest.com",
+      phone: "+1 (555) 234-5678",
+      address: "456 Eco Park Road, Sustainable City, NY 10001",
+      description: "GreenHarvest Industries pioneers sustainable agricultural practices with cutting-edge technology. We help farmers maximize yields while minimizing environmental impact.",
+      logo: "assets/images/greenharvest_logo.png",
+      products: ["Sustainable Farming Equipment", "Organic Seeds", "Bio Fertilizers"],
+      website: "www.greenharvest.com",
+    ),
+    Company(
+      name: "FarmPure Foods",
+      email: "support@farmpure.com",
+      phone: "+1 (555) 345-6789",
+      address: "789 Pure Foods Avenue, Fresh Town, TX 75001",
+      description: "FarmPure Foods connects local farmers with consumers seeking farm-fresh products. We ensure quality and transparency in every step of the food supply chain.",
+      logo: "assets/images/farmpure_logo.png",
+      products: ["Organic Meat", "Farm Fresh Eggs", "Artisanal Cheese", "Honey"],
+      website: "www.farmpure.com",
+    ),
+    Company(
+      name: "Organic Valley Co.",
+      email: "hello@organicvalley.com",
+      phone: "+1 (555) 456-7890",
+      address: "321 Organic Lane, Green City, WA 98101",
+      description: "Organic Valley Co. is a farmer-owned cooperative dedicated to producing the highest quality organic dairy and meat products while supporting sustainable farming practices.",
+      logo: "assets/images/organicvalley_logo.png",
+      products: ["Organic Milk", "Grass-fed Beef", "Organic Butter", "Yogurt"],
+      website: "www.organicvalley.com",
+    ),
+    Company(
+      name: "FreshFarm Exports",
+      email: "sales@freshfarm.com",
+      phone: "+1 (555) 567-8901",
+      address: "567 Export Hub, International Zone, FL 33101",
+      description: "FreshFarm Exports specializes in connecting local farmers with international markets. We handle logistics, compliance, and distribution to ensure smooth export operations.",
+      logo: "assets/images/freshfarm_logo.png",
+      products: ["Export Services", "Cold Chain Solutions", "Quality Certification", "Market Analysis"],
+      website: "www.freshfarm.com",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('FarmConnect'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {},
-          ),
-        ],
-      ),
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.green),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.white,
-                    child: Icon(Icons.person, size: 40),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'User Name',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ],
+      body: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.green.shade50,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: const Text(
+              "Connect with Leading Agricultural Companies",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green,
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Profile'),
-              onTap: () {},
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: companies.length,
+              itemBuilder: (context, index) {
+                return CompanyCard(company: companies[index]);
+              },
             ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('About Us'),
-              onTap: () {},
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class CompanyCard extends StatelessWidget {
+  final Company company;
+
+  const CompanyCard({
+    Key? key,
+    required this.company,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: const EdgeInsets.only(bottom: 16),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: Colors.green.shade50,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+              ),
             ),
-            ListTile(
-              leading: const Icon(Icons.description),
-              title: const Text('Terms & Conditions'),
-              onTap: () {},
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.business, size: 40, color: Colors.green.shade700),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        company.name,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        company.website,
+                        style: TextStyle(
+                          color: Colors.green.shade700,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            ListTile(
-              leading: const Icon(Icons.shopping_cart),
-              title: const Text('Book Resources'),
-              onTap: () {},
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                SizedBox(
+                  width: 200,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _buildInfoRow(Icons.email, company.email),
+                      const SizedBox(height: 8),
+                      _buildInfoRow(Icons.phone, company.phone),
+                    ],
+                  ),
+                ),
+                ElevatedButton.icon(
+                  onPressed: () => _showCompanyDetails(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  icon: const Icon(Icons.connect_without_contact),
+                  label: const Text("Connect"),
+                ),
+              ],
             ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(IconData icon, String text) {
+    return Row(
+      children: [
+        Icon(icon, size: 16, color: Colors.grey),
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: const TextStyle(fontSize: 14),
+        ),
+      ],
+    );
+  }
+
+  void _showCompanyDetails(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 30,
+                      backgroundColor: Colors.white,
+                      child: Icon(Icons.business, size: 40, color: Colors.green.shade700),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        company.name,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildDetailSection("About", company.description),
+                    const SizedBox(height: 16),
+                    _buildDetailSection("Contact Information", """
+Email: ${company.email}
+Phone: ${company.phone}
+Address: ${company.address}
+Website: ${company.website}
+                    """),
+                    const SizedBox(height: 16),
+                    _buildDetailSection("Products & Services",
+                        company.products.map((p) => "• $p").join("\n")),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("Close"),
+                        ),
+                        const SizedBox(width: 8),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Implement email/contact functionality
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                          ),
+                          child: const Text("Send Message"),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        children: const [
-          HomeContent(),
-          BookResourcesPage(),
-          ConnectPage(),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.chat),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark),
-            label: 'Booked',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.connect_without_contact),
-            label: 'Connect',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
     );
   }
-}
 
-class HomeContent extends StatelessWidget {
-  const HomeContent({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Welcome to FarmConnect', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          SizedBox(height: 20),
-          Icon(Icons.agriculture, size: 100, color: Colors.green),
-        ],
-      ),
-    );
-  }
-}
-
-class ConnectPage extends StatelessWidget {
-  const ConnectPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    List<Map<String, String>> industries = [
-      {"name": "AgroFresh Ltd.", "contact": "contact@agrofresh.com"},
-      {"name": "GreenHarvest Industries", "contact": "info@greenharvest.com"},
-      {"name": "FarmPure Foods", "contact": "support@farmpure.com"},
-      {"name": "Organic Valley Co.", "contact": "hello@organicvalley.com"},
-      {"name": "FreshFarm Exports", "contact": "sales@freshfarm.com"},
-    ];
-
-    return ListView.builder(
-      padding: const EdgeInsets.all(10),
-      itemCount: industries.length,
-      itemBuilder: (context, index) {
-        return Card(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          child: ListTile(
-            leading: const Icon(Icons.factory, color: Colors.green),
-            title: Text(industries[index]["name"]!),
-            subtitle: Text(industries[index]["contact"]!),
-            trailing: ElevatedButton(
-              onPressed: () {},
-              child: const Text("Connect"),
-            ),
+  Widget _buildDetailSection(String title, String content) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
-        );
-      },
+        ),
+        const SizedBox(height: 8),
+        Text(
+          content,
+          style: const TextStyle(fontSize: 14, height: 1.5),
+        ),
+      ],
     );
   }
 }

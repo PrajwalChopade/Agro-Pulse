@@ -31,133 +31,133 @@ class CropModel {
   'rice': {
     'description': 'Staple food crop grown in flooded fields',
     'growing_season': 'Kharif season (June-November)',
-    'water_requirement': 'High (1000-2500mm)',
+    // 'water_requirement': 'High (1000-2500mm)',
     'soil_type': 'Clay or clay loam'
   },
   'maize': {
     'description': 'Versatile crop used for food, feed, and industrial products',
     'growing_season': 'Year-round in suitable conditions',
-    'water_requirement': 'Medium (500-800mm)',
+    // 'water_requirement': 'Medium (500-800mm)',
     'soil_type': 'Well-drained loamy soil'
   },
   'chickpea': {
     'description': 'Protein-rich legume crop',
     'growing_season': 'Rabi season (October-March)',
-    'water_requirement': 'Low (400-600mm)',
+    // 'water_requirement': 'Low (400-600mm)',
     'soil_type': 'Sandy loam to clay loam'
   },
   'kidneybeans': {
     'description': 'Nutrient-rich legume crop used for food',
     'growing_season': 'Kharif & Rabi seasons',
-    'water_requirement': 'Moderate (500-700mm)',
+    // 'water_requirement': 'Moderate (500-700mm)',
     'soil_type': 'Well-drained loamy soil'
   },
   'pigeonpeas': {
     'description': 'Drought-resistant legume crop',
     'growing_season': 'Kharif season (June-December)',
-    'water_requirement': 'Low (600-1000mm)',
+    // 'water_requirement': 'Low (600-1000mm)',
     'soil_type': 'Well-drained sandy loam'
   },
   'mothbeans': {
     'description': 'Drought-tolerant legume grown in arid regions',
     'growing_season': 'Kharif season (June-September)',
-    'water_requirement': 'Low (300-500mm)',
+    // 'water_requirement': 'Low (300-500mm)',
     'soil_type': 'Sandy loam soil'
   },
   'mungbean': {
     'description': 'Protein-rich pulse crop used for dal & sprouts',
     'growing_season': 'Kharif & Summer season',
-    'water_requirement': 'Low (450-600mm)',
+    // 'water_requirement': 'Low (450-600mm)',
     'soil_type': 'Sandy loam, well-drained soil'
   },
   'blackgram': {
     'description': 'Highly nutritious legume used in dal preparations',
     'growing_season': 'Kharif & Rabi season',
-    'water_requirement': 'Medium (600-800mm)',
+    // 'water_requirement': 'Medium (600-800mm)',
     'soil_type': 'Loamy or clay loam'
   },
   'lentil': {
     'description': 'Protein-rich legume crop, widely consumed as dal',
     'growing_season': 'Rabi season (October-April)',
-    'water_requirement': 'Low (300-450mm)',
+    // 'water_requirement': 'Low (300-450mm)',
     'soil_type': 'Sandy loam to clay loam'
   },
   'pomegranate': {
     'description': 'Drought-tolerant fruit crop with high market value',
     'growing_season': 'Throughout the year',
-    'water_requirement': 'Low to medium (500-800mm)',
+    // 'water_requirement': 'Low to medium (500-800mm)',
     'soil_type': 'Well-drained sandy loam'
   },
   'banana': {
     'description': 'Tropical fruit crop requiring high moisture',
     'growing_season': 'Year-round in warm climates',
-    'water_requirement': 'High (1500-2500mm)',
+    // 'water_requirement': 'High (1500-2500mm)',
     'soil_type': 'Fertile loamy soil with good drainage'
   },
   'mango': {
     'description': 'Popular tropical fruit tree with seasonal production',
     'growing_season': 'Flowering in January-April, harvested in summer',
-    'water_requirement': 'Medium (750-2500mm)',
+    // 'water_requirement': 'Medium (750-2500mm)',
     'soil_type': 'Well-drained loamy soil'
   },
   'grapes': {
     'description': 'Fruit crop used for wine, juice, and fresh consumption',
     'growing_season': 'Spring and early summer',
-    'water_requirement': 'Medium (600-800mm)',
+    // 'water_requirement': 'Medium (600-800mm)',
     'soil_type': 'Well-drained sandy loam'
   },
   'watermelon': {
     'description': 'Juicy summer fruit with high water content',
     'growing_season': 'Summer (February-June)',
-    'water_requirement': 'Moderate (400-600mm)',
+    // 'water_requirement': 'Moderate (400-600mm)',
     'soil_type': 'Sandy loam, well-drained'
   },
   'muskmelon': {
     'description': 'Sweet summer fruit with high vitamin content',
     'growing_season': 'Summer (March-July)',
-    'water_requirement': 'Moderate (500-700mm)',
+    // 'water_requirement': 'Moderate (500-700mm)',
     'soil_type': 'Sandy loam, well-drained'
   },
   'apple': {
     'description': 'Temperate fruit crop grown in colder regions',
     'growing_season': 'Winter dormancy, harvested in late summer-autumn',
-    'water_requirement': 'Medium (800-1200mm)',
+    // 'water_requirement': 'Medium (800-1200mm)',
     'soil_type': 'Well-drained loamy soil'
   },
   'orange': {
     'description': 'Citrus fruit rich in Vitamin C',
     'growing_season': 'Harvested in winter and early summer',
-    'water_requirement': 'Medium (1000-1500mm)',
+    // 'water_requirement': 'Medium (1000-1500mm)',
     'soil_type': 'Well-drained sandy loam'
   },
   'papaya': {
     'description': 'Fast-growing fruit crop with year-round production',
     'growing_season': 'Throughout the year',
-    'water_requirement': 'Medium (800-1000mm)',
+    // 'water_requirement': 'Medium (800-1000mm)',
     'soil_type': 'Loamy soil with good drainage'
   },
   'coconut': {
     'description': 'Tropical tree with multiple uses from food to oil production',
     'growing_season': 'Throughout the year',
-    'water_requirement': 'High (1500-2500mm)',
+    // 'water_requirement': 'High (1500-2500mm)',
     'soil_type': 'Well-drained sandy loam'
   },
   'cotton': {
     'description': 'Fiber crop used for textile production',
     'growing_season': 'Kharif season (April-October)',
-    'water_requirement': 'Medium (700-1200mm)',
+    // 'water_requirement': 'Medium (700-1200mm)',
     'soil_type': 'Well-drained black cotton soil'
   },
   'jute': {
     'description': 'Fiber crop used for making sacks and ropes',
     'growing_season': 'March-June (Harvested in July-September)',
-    'water_requirement': 'High (1200-1500mm)',
+    // 'water_requirement': 'High (1200-1500mm)',
     'soil_type': 'Alluvial soil, loamy'
   },
   'coffee': {
     'description': 'Beverage crop grown in shaded high-altitude areas',
     'growing_season': 'Harvested in winter (November-March)',
-    'water_requirement': 'High (1500-2500mm)',
+    // 'water_requirement': 'High (1500-2500mm)',
     'soil_type': 'Well-drained volcanic or loamy soil'
   }
 };
