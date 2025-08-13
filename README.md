@@ -1,16 +1,29 @@
-# agri_app
+# 🌱 Agro-Pulse
 
-A new Flutter project.
+**Agro-Pulse** is a smart agriculture application designed to empower farmers by providing AI-driven soil fertility predictions, connecting them with vendors and marketplaces, and enabling equipment resource sharing.  
+The app bridges technology and agriculture, helping farmers make informed decisions, improve productivity, and expand market reach.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 🚀 Features
 
-A few resources to get you started if this is your first Flutter project:
+- **AI-based Soil Fertility Prediction**
+  - Analyze soil data and predict fertility levels for better crop selection.
+  
+- **Farmer-Vendor Connectivity**
+  - Connect farmers directly with trusted vendors for seeds, fertilizers, pesticides, and more.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Marketplace Integration**
+  - Sell produce directly to local and regional markets.
+  - Access real-time demand and price updates.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Equipment Resource Sharing**
+  - Rent, share, or request farming equipment from nearby farmers and service providers.
+
+- **Multi-Language Support**
+  - Localized content for better accessibility.
+
+- **User-Friendly Interface**
+  - Simple, clean, and intuitive design for seamless use.
+
+---
